@@ -45,28 +45,30 @@ public class Mode1Controller : BasePlayerController
             Quaternion rotation = Quaternion.identity;
             Vector3 position = Vector3.zero;
             Vector3 fireDirection = Vector3.zero;
-            if (Input.GetButton("FireUp"))
+            float fireHoriz = Input.GetAxis("FireHoriz");
+            float fireVert = Input.GetAxis("FireVert");
+            if (fireVert > 0)
             {
                 fired = true;
                 rotation = Quaternion.Euler(90, 0, 0);
                 position = fireUp.position;
                 fireDirection = Vector3.forward;
             }
-            if (Input.GetButton("FireLeft"))
+            if (fireHoriz < 0)
             {
                 fired = true;
                 rotation = Quaternion.Euler(90, -90, 0);
                 position = fireLeft.position;
                 fireDirection = Vector3.left;
             }
-            if (Input.GetButton("FireDown"))
+            if (fireVert < 0)
             {
                 fired = true;
                 rotation = Quaternion.Euler(-90, 0, 0);
                 position = fireDown.position;
                 fireDirection = Vector3.back;
             }
-            if (Input.GetButton("FireRight"))
+            if (fireHoriz > 0)
             {
                 fired = true;
                 rotation = Quaternion.Euler(90, 90, 0);

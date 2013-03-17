@@ -15,8 +15,14 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("player"))
+        {
+            if (other.CompareTag("enemy"))
+                other.GetComponent<Mode1Enemy>().Destroy();
             Destroy(gameObject);
+        }
     }
+
+    #region public functions
 
     public void Fire()
     {
@@ -25,4 +31,6 @@ public class Bullet : MonoBehaviour
         fired = true;
         rigidbody.AddForce(direction * initialForce);
     }
+
+    #endregion public functions
 }
