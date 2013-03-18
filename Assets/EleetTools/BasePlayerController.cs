@@ -18,10 +18,11 @@ public class BasePlayerController : MonoBehaviour
 
     void Update()
     {
-        if (LockPlayerControls || !GameStateManager.Instance.Paused)
+        if (LockPlayerControls)
         {
             CheckControls();
         }
+        CheckNeverLockControls();
     }
 
     protected virtual void OnStart()
@@ -31,4 +32,5 @@ public class BasePlayerController : MonoBehaviour
     }
 
     protected virtual void CheckControls() { }
+    protected virtual void CheckNeverLockControls() { }
 }

@@ -17,7 +17,11 @@ public class Bullet : MonoBehaviour
         if (!other.CompareTag("player"))
         {
             if (other.CompareTag("enemy"))
-                other.GetComponent<Mode1Enemy>().Destroy();
+            {
+                Mode1Enemy enemy = other.GetComponent<Mode1Enemy>();
+                Mode1GameStateManager.Instance.ScoreSystem.AddScore(enemy.scoreValue);
+                enemy.Destroy();
+            }
             Destroy(gameObject);
         }
     }

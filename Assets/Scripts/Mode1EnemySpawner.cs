@@ -67,4 +67,14 @@ public class Mode1EnemySpawner : MonoBehaviour
             enemyObject.rigidbody.AddForce(forceDirection * spawnForce);
         }
     }
+
+    void OnPauseGame()
+    {
+        Spawning = false;
+    }
+
+    void OnResumeGame()
+    {
+        Spawning = true;
+    }
 }
