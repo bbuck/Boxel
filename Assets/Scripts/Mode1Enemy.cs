@@ -9,6 +9,17 @@ public class Mode1Enemy : MonoBehaviour
 
     private Vector3 storedVelocity;
 
+    private static Mode1ScoreSystem _scoreSystem;
+    private static Mode1ScoreSystem ScoreSystem
+    {
+        get
+        {
+            if (_scoreSystem == null)
+                _scoreSystem = GameObject.Find("global").GetComponent<Mode1ScoreSystem>();
+            return _scoreSystem;
+        }
+    }
+
     void Start()
     {
         Invoke("AddOffscreenDestroy", 0.4f);
@@ -23,7 +34,7 @@ public class Mode1Enemy : MonoBehaviour
             if (player)
             {
                 Camera.main.GetComponent<CameraShake>().Shake();
-                Mode1GameStateManager.Instance.ScoreSystem.RemoveScore(scoreValue * 2);
+                ScoreSystem.RemoveScore(scoreValue * 2);
             }
             Destroy();
         }

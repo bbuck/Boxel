@@ -9,12 +9,12 @@ public class Mode1Manager : MonoBehaviour
 
     void OnEnable()
     {
-        Mode1GameStateManager.Instance.ScoreSystem.ScoreChanged += ScoreChanged;
+        GetComponent<Mode1ScoreSystem>().ScoreChanged += ScoreChanged;
     }
 
     void OnDisable()
     {
-        Mode1GameStateManager.Instance.ScoreSystem.ScoreChanged -= ScoreChanged;
+        GetComponent<Mode1ScoreSystem>().ScoreChanged -= ScoreChanged;
     }
 
     #region helper functions
@@ -24,8 +24,9 @@ public class Mode1Manager : MonoBehaviour
         if (newScore > scoreThreshold)
         {
             GetComponent<Mode1EnemySpawner>().Spawning = false;
-            Quaternion rotation = Quaternion.Euler(0, 45, 0);
-            PrefabManager.Instance.CreateInstance("Mode1 Portal", portalLocation.position, rotation);
+            Quaternion rotation = Quaternion.Euler(0, -45, 0);
+            GameObject portalObj = PrefabManager.Instance.CreateInstance("Mode1 Portal", portalLocation.position, rotation);
+            portalObj.transform.parent = portalLocation;
         }
     }
 

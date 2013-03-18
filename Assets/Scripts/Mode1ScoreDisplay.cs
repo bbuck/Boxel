@@ -14,15 +14,18 @@ public class Mode1ScoreDisplay : MonoBehaviour
     private bool shrinking = false;
     private float targetCharSize;
 
+    private Mode1ScoreSystem scoreSystem;
+
     void OnEnable()
     {
-        Mode1GameStateManager.Instance.ScoreSystem.ScoreChanged += ScoreChanged;
+        scoreSystem = GameObject.Find("global").GetComponent<Mode1ScoreSystem>();
+        scoreSystem.ScoreChanged += ScoreChanged;
         targetCharSize = display.characterSize;
     }
 
     void OnDisable()
     {
-        Mode1GameStateManager.Instance.ScoreSystem.ScoreChanged -= ScoreChanged;
+        scoreSystem.ScoreChanged -= ScoreChanged;
     }
 
     void Update()

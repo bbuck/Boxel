@@ -18,7 +18,8 @@ public class BasePlayerController : MonoBehaviour
 
     void Update()
     {
-        if (LockPlayerControls)
+        OnUpdate();
+        if (!LockPlayerControls)
         {
             CheckControls();
         }
@@ -31,6 +32,17 @@ public class BasePlayerController : MonoBehaviour
         Motor = GetComponent<CharacterMotor>();
     }
 
+    protected virtual void OnUpdate() { }
     protected virtual void CheckControls() { }
     protected virtual void CheckNeverLockControls() { }
+    
+    protected virtual void OnPauseGame()
+    {
+        LockPlayerControls = true;
+    }
+
+    protected virtual void OnResumeGame()
+    {
+        LockPlayerControls = false;
+    }
 }

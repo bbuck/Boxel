@@ -12,6 +12,17 @@ public class Bullet : MonoBehaviour
 
     private bool fired = false;
 
+    private static Mode1ScoreSystem _scoreSystem;
+    private static Mode1ScoreSystem ScoreSystem
+    {
+        get
+        {
+            if (_scoreSystem == null)
+                _scoreSystem = GameObject.Find("global").GetComponent<Mode1ScoreSystem>();
+            return _scoreSystem;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("player"))
@@ -19,7 +30,7 @@ public class Bullet : MonoBehaviour
             if (other.CompareTag("enemy"))
             {
                 Mode1Enemy enemy = other.GetComponent<Mode1Enemy>();
-                Mode1GameStateManager.Instance.ScoreSystem.AddScore(enemy.scoreValue);
+                ScoreSystem.AddScore(enemy.scoreValue);
                 enemy.Destroy();
             }
             Destroy(gameObject);
